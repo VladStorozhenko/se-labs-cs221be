@@ -1,0 +1,47 @@
+#include <iostream> 
+#include <math.h> 
+using namespace std; 
+int main() 
+{ 
+    int n; 
+    double xmax, xmin, step; 
+    cout << "Input n>1, n= "; 
+    cin >> n; 
+    cout << "Input x min = "; 
+    cin >> xmin; 
+    cout << "Input x max = "; 
+    cin >> xmax; 
+    cout << "Input step = "; 
+    cin >> step; 
+    for (double x = xmin; x <= xmax; x += step) 
+    { 
+        double y; 
+        if (x > 0) 
+        { 
+            y = 1; 
+            for (int i = 1; i <= n; i++) 
+            { 
+                y *=((i-x)/(x*i)); 
+            } 
+        } 
+        else 
+        { 
+            y = 0; 
+            for (int i = 0; i <= n - 1; i++) 
+            { 
+ 
+                for (int j = 0; j <= n - 1; j++) 
+                { 
+ 
+                    if (x - i + j == 0) { 
+                        continue; 
+                    } 
+                    y += (1 / (x - i + j)); 
+                } 
+            } 
+        } 
+        cout << "x= " << x << "\ny= " << y << endl; 
+    }
+    system("pause"); 
+    return 0; 
+}
