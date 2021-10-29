@@ -1,0 +1,40 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+   
+         int n;
+         double y = 0, x;
+        cout << "Input n>1, n= ";
+    cin >> n;
+    cout << "Input x= ";
+    cin >> x;
+    if (x > 0)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            int p = 1;
+           y = p*(1/x-1/i);
+        }
+    }
+    else
+    {
+        for (int i = 0; i <= n-1; i++)
+        { 
+ 
+            for (int j = 0; j <= n - 1; j++)
+            {
+
+                if (x - i + j == 0) {
+                    continue;
+                }
+                y += (1 / (x - i + j));
+            }
+        }
+    }
+    cout << "y= " << y << endl;
+    system("pause");
+    return 0;
+}
+}
