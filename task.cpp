@@ -1,20 +1,24 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-int main()
-{
-	int n;
-	float x, sum, prod;
+void checkValidInput(){
+	if(cin.fail()){
+		throw "Incorrect Input";
+	}
+}
+void checkValidParams(int n){
+	if(n<3) throw "Input Correct Data";
+}
+int calculate(int x,int n){
+	float sum, prod;
+	
 	sum = 0;
 	prod = 1;
-	cout << "input x,n\n";
-	cin >> x >> n;
-
 	if (x < 0) {
 		for (int j = 2; j <= n - 2;j++) {
 			prod *= j + x;
 		}
-		cout << prod;
+		return prod;
 	}
 	else {
 		for (int i = 0; i <= n ; i++) {
@@ -24,5 +28,15 @@ int main()
 			sum += prod;
 			prod = 1;
 		}
-		cout << sum;
+		return sum;
 	}
+}
+int main()
+{
+	int n;
+	float x;
+	cout << "input x,n\n";
+	cin >> x >> n;
+	cout<<"y = "<<calculate(x,n);
+	
+}
