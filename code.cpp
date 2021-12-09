@@ -1,4 +1,50 @@
 #include <iostream>
+#include <string>
+#include <vector>
+
+using Result = std::pair<double, double>;
+
+bool is_n_valid(int n)
+{
+	return n > 1;
+}
+
+bool is_range_valid(double min, double max)
+{
+	return min <= max;
+}
+
+bool is_step_valid(double step)
+{
+	return step > 0;
+}
+
+template <typename T>
+T read_value(const std::string &prompt)
+{
+	std::cout << prompt;
+	T value;
+	std::cin >> value;
+	if (std::cin.fail())
+		throw "Input error";
+	return value;
+}
+
+void input(double &x_min, double &x_max, double &step, int &n)
+{
+	x_min = read_value<double>("Enter x min: ");
+	x_max = read_value<double>("Enter x max: ");
+	if (!is_range_valid(x_min, x_max))
+		throw "Invalid range";
+
+	step = read_value<double>("Enter step: ");
+	if (!is_step_valid(step))
+		throw "Invalid step";
+
+	n = read_value<int>("Enter n > 1: ");
+	if (!is_n_valid(n))
+		throw "Invalid n";
+}
 
 double y_x_leq_zero(double x, int n)
 {
@@ -30,28 +76,19 @@ double y(double x, int n)
 	}
 }
 
-void calc_y_on_range(double x_min, double x_max, double step, int n)
+std::vector<Result> calc_y_on_range(double x_min, double x_max, double step, int n)
 {
+	std::vector<Result> results;
 	for (double x = x_min; x <= x_max; x += step) {
-		std::cout << "x: " << x << "\ty: " << y(x, n) << std::endl;
+		results.push_back({x, y(x, n)});
 	}
+	return results;
 }
 
-void input(double &x_min, double &x_max, double &step, int &n)
+void print_results(const std::vector<Result> &results)
 {
-	std::cout << "Enter x min: ";
-	std::cin >> x_min;
-
-	std::cout << "Enter x max: ";
-	std::cin >> x_max;
-
-	std::cout << "Enter step: ";
-	std::cin >> step;
-
-	n = 0;
-	while (n <= 1) {
-		std::cout << "Enter n > 1: ";
-		std::cin >> n;
+	for (auto &result : results) {
+		std::cout << "x: " << result.first << "\ty: " << result.second << std::endl;
 	}
 }
 
@@ -62,8 +99,17 @@ int main()
 	double step;
 	int n;
 
-	input(x_min, x_max, step, n);
-	calc_y_on_range(x_min, x_max, step, n);
+	try {
+		input(x_min, x_max, step, n);
+		auto results = calc_y_on_range(x_min, x_max, step, n);
+		print_results(results);
+	}
+	catch (const char *ex) {
+		std::cout << ex << std::endl;
+	}
+	catch (...) {
+		std::cout << "Unknown error" << std::endl;
+	}
 
 	return 0;
 }
