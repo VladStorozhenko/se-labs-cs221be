@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.0.0)
 project(lab VERSION 0.1.0)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -24,11 +23,13 @@ else()
 	)
 endif()
 
-add_executable(code code.cpp)
+file (GLOB SOURCES input.cpp calculation.cpp print.cpp)
+
+add_executable(code code.cpp ${SOURCES})
 
 enable_testing()
 
-add_executable(tests tests.cpp)
+add_executable(tests tests.cpp ${SOURCES})
 
 target_link_libraries(
   tests
