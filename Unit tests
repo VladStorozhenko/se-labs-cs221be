@@ -1,0 +1,135 @@
+#include "pch.h"
+#include "CppUnitTest.h"
+#include "../lab 5 se/lab 5 se.cpp"
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace UnitTest1
+{
+	TEST_CLASS(checkValidParams_Tests)
+	{
+	public:
+		
+		TEST_METHOD(checkValidParams_ExceptionThrown)
+		{
+			int n = -3;
+			try
+			{
+				checkValidParams(n);
+				Assert::Fail();
+			}
+			catch(...)
+			{
+				Assert::IsTrue(true);
+			}
+		}
+
+		TEST_METHOD(checkValidParams_ExceptionNotThrown)
+		{
+			int n = 10;
+			try
+			{
+				checkValidParams(n);
+				Assert::IsTrue(true);
+			}
+			catch(...)
+			{
+				Assert::Fail();
+			}
+		}
+	};
+
+
+	TEST_CLASS(checkValidRange_Tests)
+	{
+	public:
+
+		TEST_METHOD(checkValidRange_ExceptionThrown)
+		{
+			double xmin = 10;
+			double xmax = 8;
+			try
+			{
+				checkValidRange(xmin,xmax);
+				Assert::Fail();
+			}
+			catch (...)
+			{
+				Assert::IsTrue(true);
+			}
+		}
+
+		TEST_METHOD(checkValidRange_ExceptionNotThrown)
+		{
+			double xmin = 5;
+			double xmax = 8;
+			try
+			{
+				checkValidRange(xmin,xmax);
+				Assert::IsTrue(true);
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
+		}
+	};
+
+
+	TEST_CLASS(checkValidStep_Tests)
+	{
+	public:
+
+		TEST_METHOD(checkValidStep_ExceptionThrown)
+		{
+			double step = -5;
+			try
+			{
+				checkValidStep(step);
+				Assert::Fail();
+			}
+			catch (...)
+			{
+				Assert::IsTrue(true);
+			}
+		}
+
+		TEST_METHOD(checkValidStep_ExceptionNotThrown)
+		{
+			double step = 9;
+			try
+			{
+				checkValidStep(step);
+				Assert::IsTrue(true);
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
+		}
+	};
+
+
+	TEST_CLASS(calculate_Tests)
+	{
+	public:
+
+		TEST_METHOD(calculate_IfxNegative)
+		{
+			int n = 3;
+			double x = -3;
+			double expected = -3.7;
+			double actual = calculate(n, x);
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(calculate_IfxPositive)
+		{
+			int n = 3;
+			double x = 5;
+			double expected = -0.032;
+			double actual = calculate(n, x);
+			Assert::AreEqual(expected, actual);
+		}
+	};
+}
