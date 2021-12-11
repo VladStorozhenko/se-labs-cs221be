@@ -35,8 +35,12 @@ int main()
 {
 	int n;
 	float x;
-	cout << "input x,n\n";
+	cout << "input n=>3\n";
+	checkValidInput();
+	checkValidParams(n);
+	cout<< "input x\n";
 	cin >> x >> n;
+	checkValidInput();
 	cout<<"y = "<<calculate(x,n);
 	
 }
