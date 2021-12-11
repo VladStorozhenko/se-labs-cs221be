@@ -33,6 +33,7 @@ int calculate(int x,int n){
 }
 int main()
 {
+	try{
 	int n;
 	float x;
 	cout << "input n=>3\n";
@@ -42,5 +43,13 @@ int main()
 	cin >> x >> n;
 	checkValidInput();
 	cout<<"y = "<<calculate(x,n);
-	
+	}
+	catch(const char* ex){
+		cout<<ex<<endl;
+		return -1;
+	}
+	catch(...){
+	 	cout<<""Uknown expression";
+		return -2;
+	}
 }
